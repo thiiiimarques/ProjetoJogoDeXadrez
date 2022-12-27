@@ -1,10 +1,14 @@
 package aplicacao;
 
+import tabuleiro.Posicao;
+
 public class Execucao {
 
 	public static void main(String[] args) {
 		
-		System.out.println("Criando projeto e associando ao GitHub");
+		Posicao posicao = new Posicao(3, 5);
+		
+		System.out.println(posicao);
 
 	}
 
