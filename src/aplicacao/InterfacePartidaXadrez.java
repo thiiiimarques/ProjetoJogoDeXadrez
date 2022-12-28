@@ -7,7 +7,7 @@ public class InterfacePartidaXadrez {
 	public static void imprimirTabuleiro(PecaXadrez[][] pecas) {
 		
 		for(int i=0; i<pecas.length; i++) {
-			System.out.print((8-i) + " ");
+			System.out.print((i+1) + " ");
 			for(int j=0; j<pecas.length; j++) {
 				imprimirPeca(pecas[i][j]);
 			}

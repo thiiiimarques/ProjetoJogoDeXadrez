@@ -11,6 +11,8 @@ public class Tabuleiro {
 		this.linhas = linhas;
 		this.colunas = colunas;
 		pecas = new Peca[linhas][colunas];
+		
+		// Porque eu estou fazendo a referencia de um onjeto sem passar os paramentros necessarios nos construtores? é possivel?
 	}
 
 	public int getLinhas() {
@@ -36,5 +38,12 @@ public class Tabuleiro {
 	public Peca peca(Posicao posicao) {
 		return pecas[posicao.getLinha()][posicao.getColuna()];
 	}
+	
+	public void colocarPecaTabuleiro(Peca peca, Posicao posicao) {
+		pecas[posicao.getLinha()][posicao.getColuna()] = peca;
+		peca.posicao = posicao;
+	}
+	
+	
 	
 }
