@@ -1,7 +1,11 @@
 package aplicacao;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 import xadrez.Cor;
 import xadrez.PecaXadrez;
+import xadrez.PosicaoXadrez;
 
 public class InterfacePartidaXadrez {
 	
@@ -24,6 +28,23 @@ public class InterfacePartidaXadrez {
 	public static final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
 	public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
 	public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
+	
+	public static PosicaoXadrez lerPosicaoXadrez(Scanner scan) {
+		
+		try {
+		
+			String posicaoEscolhida = scan.nextLine();
+			
+			char coluna = posicaoEscolhida.charAt(0);
+			int linha = Integer.parseInt(posicaoEscolhida.substring(1));
+			
+			return new PosicaoXadrez(coluna, linha);
+		}
+		catch(RuntimeException excecao) {
+			throw new InputMismatchException("Error para ler a posição. Valide se o valor esta entre a1-a8 até h1-h8!");
+		}
+	}
+	
 	
 	public static void imprimirTabuleiro(PecaXadrez[][] pecas) {
 		
