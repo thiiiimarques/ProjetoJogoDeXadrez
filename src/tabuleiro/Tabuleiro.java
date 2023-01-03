@@ -9,14 +9,13 @@ public class Tabuleiro {
 	
 	public Tabuleiro(int linhas, int colunas) {
 		if(linhas < 1 || colunas < 1) {
-			throw new ExcecaoTabuleiro("Erro na criação do tabuleiro! Para se jogar xadrez vc precisa de Tabuleiro 8x8");
+			throw new ExcecaoTabuleiro("Erro na criação do tabuleiro! Você precisa de numeros positivos para se criar um Tabuleiro de jogo");
 		}
 		
 		this.linhas = linhas;
 		this.colunas = colunas;
 		pecas = new Peca[linhas][colunas];
 		
-		// Porque eu estou fazendo a referencia de um onjeto sem passar os paramentros necessarios nos construtores? é possivel?
 	}
 
 	public int getLinhas() {
@@ -27,14 +26,14 @@ public class Tabuleiro {
 		return colunas;
 	}
 	
-	public Peca peca(int linha, int coluna) {
+	public Peca buscarPeca(int linha, int coluna) {
 		if (!existePosicao(linha, coluna)) {
 			throw new ExcecaoTabuleiro("Essa posição não existe dentro deste tabuleiro!");
 		}
 		return pecas[linha][coluna];
 	}
 	
-	public Peca peca(Posicao posicao) {
+	public Peca buscarPeca(Posicao posicao) {
 		if(!existePosicao(posicao)) {
 			throw new ExcecaoTabuleiro("Essa posição não existe dentro deste tabuleiro!");
 		}
@@ -54,11 +53,11 @@ public class Tabuleiro {
 			throw new ExcecaoTabuleiro("Essa posição não existe dentro deste tabuleiro!");
 		}
 		
-		if (peca(posicao) == null) {
+		if (buscarPeca(posicao) == null) {
 			return null;
 		}
 		
-		Peca auxiliar = peca(posicao);
+		Peca auxiliar = buscarPeca(posicao);
 		auxiliar.posicao = null;
 		pecas[posicao.getLinha()][posicao.getColuna()] = null;
 		
@@ -77,7 +76,7 @@ public class Tabuleiro {
 		if(!existePosicao(posicao)) {
 			throw new ExcecaoTabuleiro("Essa posição não existe dentro deste tabuleiro!");
 		}
-		return peca(posicao) != null;
+		return buscarPeca(posicao) != null;
 	}
 	
 }

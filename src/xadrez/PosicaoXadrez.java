@@ -4,11 +4,11 @@ import tabuleiro.Posicao;
 
 public class PosicaoXadrez {
 	
-	private char coluna;
+	private int coluna;
 	private int linha;
 	
-	public PosicaoXadrez(char coluna, int linha) {
-		if(coluna < 'a' || linha < 0 || coluna > 'h' || linha > 8) {
+	public PosicaoXadrez(int coluna, int linha) {
+		if(coluna < 0 || linha < 0 || coluna > 8 || linha > 8) {
 			throw new ExcecaoXadrez(" Erro de posição no Jogo, É valido posições até a linha 8 e coluna h");
 		}
 		
@@ -16,7 +16,7 @@ public class PosicaoXadrez {
 		this.linha = linha;
 	}
 
-	public char getColuna() {
+	public int getColuna() {
 		return coluna;
 	}
 
@@ -25,12 +25,13 @@ public class PosicaoXadrez {
 	}
 	
 	protected Posicao converterPosicaoMatriz() {
-		return new Posicao(0 + (linha-1) , coluna - 'a');
-		// como ele fez uma operação de diminuir uma letra por outra letra?
+		return new Posicao((linha-1) , coluna );
+		
+		// como ele fez uma operação de diminuir uma letra por outra letra? 
 	}
 	
 	protected static PosicaoXadrez converterPosicaoJogo(Posicao posicao) {
-		return new PosicaoXadrez( (char) ('a' - posicao.getColuna()) , 0 + (posicao.getLinha()-1));
+		return new PosicaoXadrez(posicao.getColuna() , (posicao.getLinha()-1));
 	}
 	
 	@Override

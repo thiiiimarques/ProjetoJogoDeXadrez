@@ -40,6 +40,7 @@ public class Execucao {
 				System.out.println(excecao.getMessage());
 				scan.nextLine();
 			}
+			
 		}
 		
 		

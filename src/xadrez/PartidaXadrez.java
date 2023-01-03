@@ -22,9 +22,7 @@ public class PartidaXadrez {
 		PecaXadrez[][] matrizPartida = new PecaXadrez[tabuleiro.getLinhas()][tabuleiro.getColunas()];
 		 for(int i=0; i<tabuleiro.getLinhas(); i++) {
 			 for(int j=0; j<tabuleiro.getColunas(); j++) {
-				 matrizPartida[i][j] = (PecaXadrez) tabuleiro.peca(i, j);
-				 // Tabuleiro não é uma subclasse de peça ou peçaXadrez (peçaXadrez que é filha de peça), porque preciso do downcasting aqui?
-				 // ** dúvida foi resolvida
+				 matrizPartida[i][j] = (PecaXadrez) tabuleiro.buscarPeca(i, j);				 
 			 }
 		 }
 		 
@@ -52,26 +50,29 @@ public class PartidaXadrez {
 		if(!tabuleiro.existePeca(posicao)) {
 			throw new ExcecaoXadrez("Não existe peça na posicao de origem! Verifique a posição corretamente");
 		}
+		if (!tabuleiro.buscarPeca(posicao).existeMovimentoPossivel()) {
+			throw new ExcecaoXadrez("Nao existe movimentos possiveis para a peça escolhida!");
+		}
 	}
 	
 	
-	private void colocarNovaPeca(char coluna, int linha, PecaXadrez peça) {
-		tabuleiro.colocarPecaTabuleiro(peça, new PosicaoXadrez(coluna, linha).converterPosicaoMatriz());
+	private void colocarNovaPeca(int coluna, int linha, PecaXadrez peca) {
+		tabuleiro.colocarPecaTabuleiro(peca, new PosicaoXadrez(coluna, linha).converterPosicaoMatriz());
 	}
 	
 	private void iniciarPartida() {
-		colocarNovaPeca('c', 1, new Torre(tabuleiro, Cor.VERDE));
-		colocarNovaPeca('c', 2, new Torre(tabuleiro, Cor.VERDE));
-		colocarNovaPeca('d', 1, new Torre(tabuleiro, Cor.VERDE));
-		colocarNovaPeca('d', 2, new Torre(tabuleiro, Cor.VERDE));
-		colocarNovaPeca('e', 1, new Rei(tabuleiro, Cor.VERDE));
-		colocarNovaPeca('e', 2, new Torre(tabuleiro, Cor.VERDE));
+		colocarNovaPeca(ValoresColunasMatriz.c.valorColuna, 8, new Torre(tabuleiro, Cor.VERDE));
+		colocarNovaPeca(ValoresColunasMatriz.d.valorColuna, 8, new Rei(tabuleiro, Cor.VERDE));
+		colocarNovaPeca(ValoresColunasMatriz.e.valorColuna, 8, new Torre(tabuleiro, Cor.VERDE));
+		colocarNovaPeca(ValoresColunasMatriz.c.valorColuna, 7, new Torre(tabuleiro, Cor.VERDE));
+		colocarNovaPeca(ValoresColunasMatriz.d.valorColuna, 7, new Torre(tabuleiro, Cor.VERDE));
+		colocarNovaPeca(ValoresColunasMatriz.e.valorColuna, 7, new Torre(tabuleiro, Cor.VERDE));
 		
-		colocarNovaPeca('c', 7, new Torre(tabuleiro, Cor.VERMELHO));
-		colocarNovaPeca('c', 8, new Torre(tabuleiro, Cor.VERMELHO));
-		colocarNovaPeca('d', 7, new Torre(tabuleiro, Cor.VERMELHO));
-		colocarNovaPeca('e', 7, new Torre(tabuleiro, Cor.VERMELHO));
-		colocarNovaPeca('e', 8, new Torre(tabuleiro, Cor.VERMELHO));
-		colocarNovaPeca('d', 8, new Rei(tabuleiro, Cor.VERMELHO));
+		colocarNovaPeca(ValoresColunasMatriz.c.valorColuna, 1, new Torre(tabuleiro, Cor.VERMELHO));
+		colocarNovaPeca(ValoresColunasMatriz.d.valorColuna, 1, new Rei(tabuleiro, Cor.VERMELHO));
+		colocarNovaPeca(ValoresColunasMatriz.e.valorColuna, 1, new Torre(tabuleiro, Cor.VERMELHO));
+		colocarNovaPeca(ValoresColunasMatriz.c.valorColuna, 2, new Torre(tabuleiro, Cor.VERMELHO));
+		colocarNovaPeca(ValoresColunasMatriz.d.valorColuna, 2, new Torre(tabuleiro, Cor.VERMELHO));
+		colocarNovaPeca(ValoresColunasMatriz.e.valorColuna, 2, new Torre(tabuleiro, Cor.VERMELHO));
 	}
 }
