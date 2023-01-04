@@ -18,6 +18,7 @@ public class InterfacePartidaXadrez {
 	public static final String ANSI_RESET = "\u001B[0m";
 	public static final String ANSI_RED = "\u001B[31m";
 	public static final String ANSI_GREEN = "\u001B[32m";
+	public static final String ANSI_YELLOW = "\u001B[33m";
 	
 	public static final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
 	public static final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
@@ -52,6 +53,12 @@ public class InterfacePartidaXadrez {
 		System.out.println();
 		System.out.println("Turno: " + partidaXadrez.getTurno());
 		System.out.println("Aguardando o Jogador: " + partidaXadrez.getJogador());
+		
+		if(partidaXadrez.getXequeMate()) {
+			System.out.print(ANSI_YELLOW);
+			System.out.println("XEQUE-MATE!!!");
+			System.out.print(ANSI_RESET);
+		}
 	}
 	
 	public static void imprimirTabuleiro(PecaXadrez[][] pecas) {

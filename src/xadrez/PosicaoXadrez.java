@@ -30,7 +30,7 @@ public class PosicaoXadrez {
 	}
 	
 	protected static PosicaoXadrez converterPosicaoJogo(Posicao posicao) {
-		return new PosicaoXadrez(posicao.getColuna() , (posicao.getLinha()-1));
+		return new PosicaoXadrez(posicao.getColuna() , (posicao.getLinha()+1));
 	}
 	
 	@Override
