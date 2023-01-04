@@ -30,7 +30,7 @@ public abstract class Peca {
 		boolean[][] matriz = possibilidadeDeMovimentos();
 		for(int i = 0; i<matriz.length; i++) {
 			for(int j = 0; j<matriz.length; j++) {
-				if(matriz[i][j] == false) {
+				if(matriz[i][j]) {
 					return true;
 				}
 			}
