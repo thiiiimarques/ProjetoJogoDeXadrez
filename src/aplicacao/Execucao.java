@@ -20,7 +20,7 @@ public class Execucao {
 		while(true) {
 			try {
 				InterfacePartidaXadrez.limparTela();
-				InterfacePartidaXadrez.imprimirTabuleiro(partidaXadrez.getPecas());
+				InterfacePartidaXadrez.imprimirPartida(partidaXadrez);
 				System.out.println();
 				System.out.print("Posicao de Origem: ");
 				PosicaoXadrez origem = InterfacePartidaXadrez.lerPosicaoXadrez(scan);
