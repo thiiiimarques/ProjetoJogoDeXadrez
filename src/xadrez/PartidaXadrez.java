@@ -11,6 +11,7 @@ import tabuleiro.Tabuleiro;
 import xadrez.pecas.Bispo;
 import xadrez.pecas.Cavalo;
 import xadrez.pecas.Peao;
+import xadrez.pecas.Rainha;
 import xadrez.pecas.Rei;
 import xadrez.pecas.Torre;
 
@@ -226,6 +227,7 @@ public class PartidaXadrez {
 		colocarNovaPeca(ValoresColunasMatriz.a.valorColuna, 8, new Torre(tabuleiro, Cor.VERDE));
 		colocarNovaPeca(ValoresColunasMatriz.b.valorColuna, 8, new Cavalo(tabuleiro, Cor.VERDE));
 		colocarNovaPeca(ValoresColunasMatriz.c.valorColuna, 8, new Bispo(tabuleiro, Cor.VERDE));
+		colocarNovaPeca(ValoresColunasMatriz.d.valorColuna, 8, new Rainha(tabuleiro, Cor.VERDE));
 		colocarNovaPeca(ValoresColunasMatriz.e.valorColuna, 8, new Rei(tabuleiro, Cor.VERDE));
 		colocarNovaPeca(ValoresColunasMatriz.f.valorColuna, 8, new Bispo(tabuleiro, Cor.VERDE));
 		colocarNovaPeca(ValoresColunasMatriz.g.valorColuna, 8, new Cavalo(tabuleiro, Cor.VERDE));
@@ -243,6 +245,7 @@ public class PartidaXadrez {
 		colocarNovaPeca(ValoresColunasMatriz.a.valorColuna, 1, new Torre(tabuleiro, Cor.VERMELHO));
 		colocarNovaPeca(ValoresColunasMatriz.b.valorColuna, 1, new Cavalo(tabuleiro, Cor.VERMELHO));
 		colocarNovaPeca(ValoresColunasMatriz.c.valorColuna, 1, new Bispo(tabuleiro, Cor.VERMELHO));
+		colocarNovaPeca(ValoresColunasMatriz.d.valorColuna, 1, new Rainha(tabuleiro, Cor.VERMELHO));
 		colocarNovaPeca(ValoresColunasMatriz.e.valorColuna, 1, new Rei(tabuleiro, Cor.VERMELHO));
 		colocarNovaPeca(ValoresColunasMatriz.f.valorColuna, 1, new Bispo(tabuleiro, Cor.VERMELHO));
 		colocarNovaPeca(ValoresColunasMatriz.g.valorColuna, 1, new Cavalo(tabuleiro, Cor.VERMELHO));

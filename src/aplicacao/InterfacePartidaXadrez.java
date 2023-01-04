@@ -53,7 +53,7 @@ public class InterfacePartidaXadrez {
 		System.out.println();
 		
 		if(!partidaXadrez.getXequeMate()) {
-			System.out.println("Turno: " + partidaXadrez.getTurno());
+			System.out.println("Turno: " + partidaXadrez.getTurno());			
 			System.out.println("Aguardando o Jogador: " + partidaXadrez.getJogador());
 			
 			if(partidaXadrez.getXequeMate()) {
@@ -81,7 +81,7 @@ public class InterfacePartidaXadrez {
 			System.out.println();
 		}
 		
-		System.out.println("  a b c d e f g h");
+		System.out.println("  a  b  c  d  e  f  g  h");
 		
 	}
 	
@@ -95,7 +95,7 @@ public class InterfacePartidaXadrez {
 			System.out.println();
 		}
 		
-		System.out.println("  a b c d e f g h");
+		System.out.println("  a  b  c  d  e  f  g  h");
 		
 	}
 	
@@ -116,7 +116,7 @@ public class InterfacePartidaXadrez {
 			}
 		}
 		
-		System.out.print(" ");
+		System.out.print("  ");
 	}
 	
 	private static void imprimirPecasCapturadas(List<PecaXadrez> pecasCapturadas) {
