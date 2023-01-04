@@ -1,6 +1,9 @@
 package xadrez;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import tabuleiro.Peca;
 import tabuleiro.Posicao;
 import tabuleiro.Tabuleiro;
@@ -12,6 +15,9 @@ public class PartidaXadrez {
 	private int turno;
 	private Cor jogador;
 	private Tabuleiro tabuleiro;
+	
+	private List<Peca> pecasTabuleiro = new ArrayList<>();
+	private List<Peca> pecasCapturadas = new ArrayList<>();
 	
 
 	public PartidaXadrez() {
@@ -66,6 +72,11 @@ public class PartidaXadrez {
 		Peca pecaCapturada = tabuleiro.removerPeca(destino); // Uma possivel "comida" de peça caso haja alguma na posição de destino
 		tabuleiro.colocarPecaTabuleiro(pecaRemovida, destino);
 		
+		if(pecaCapturada != null) {
+			pecasTabuleiro.remove(pecaCapturada);
+			pecasCapturadas.add(pecaCapturada);
+		}
+		
 		return pecaCapturada;
 	}
 	
@@ -102,6 +113,7 @@ public class PartidaXadrez {
 	
 	private void colocarNovaPeca(int coluna, int linha, PecaXadrez peca) {
 		tabuleiro.colocarPecaTabuleiro(peca, new PosicaoXadrez(coluna, linha).converterPosicaoMatriz());
+		pecasTabuleiro.add(peca);
 	}
 	
 	private void iniciarPartida() {
