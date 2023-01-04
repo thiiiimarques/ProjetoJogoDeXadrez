@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import tabuleiro.Peca;
 import tabuleiro.Posicao;
 import tabuleiro.Tabuleiro;
+import xadrez.pecas.Peao;
 import xadrez.pecas.Rei;
 import xadrez.pecas.Torre;
 
@@ -94,7 +95,8 @@ public class PartidaXadrez {
 	}
 	
 	private Peca moverPeca(Posicao origem, Posicao destino) {
-		Peca pecaRemovida = tabuleiro.removerPeca(origem);
+		PecaXadrez pecaRemovida = (PecaXadrez) tabuleiro.removerPeca(origem);
+		pecaRemovida.adicionarMovimentos();
 		Peca pecaCapturada = tabuleiro.removerPeca(destino); // Uma possivel "comida" de peça caso haja alguma na posição de destino
 		tabuleiro.colocarPecaTabuleiro(pecaRemovida, destino);
 		
@@ -108,7 +110,8 @@ public class PartidaXadrez {
 	
 	private void desmoverPeca(Posicao origem, Posicao destino, Peca pecaCapturada) {
 		
-		Peca peca = tabuleiro.removerPeca(destino);
+		PecaXadrez peca = (PecaXadrez) tabuleiro.removerPeca(destino);
+		peca.diminuirMovimentos();
 		tabuleiro.colocarPecaTabuleiro(peca, origem);
 		
 		if(pecaCapturada != null) {
@@ -218,13 +221,30 @@ public class PartidaXadrez {
 	
 	private void iniciarPartida() {
 
-		colocarNovaPeca(ValoresColunasMatriz.d.valorColuna, 8, new Torre(tabuleiro, Cor.VERDE));
+		colocarNovaPeca(ValoresColunasMatriz.a.valorColuna, 8, new Torre(tabuleiro, Cor.VERDE));
 		colocarNovaPeca(ValoresColunasMatriz.e.valorColuna, 8, new Rei(tabuleiro, Cor.VERDE));
-		colocarNovaPeca(ValoresColunasMatriz.h.valorColuna, 2, new Torre(tabuleiro, Cor.VERDE));
+		colocarNovaPeca(ValoresColunasMatriz.h.valorColuna, 8, new Torre(tabuleiro, Cor.VERDE));
+		colocarNovaPeca(ValoresColunasMatriz.a.valorColuna, 7, new Peao(tabuleiro, Cor.VERDE));
+		colocarNovaPeca(ValoresColunasMatriz.b.valorColuna, 7, new Peao(tabuleiro, Cor.VERDE));
+		colocarNovaPeca(ValoresColunasMatriz.c.valorColuna, 7, new Peao(tabuleiro, Cor.VERDE));
+		colocarNovaPeca(ValoresColunasMatriz.d.valorColuna, 7, new Peao(tabuleiro, Cor.VERDE));
+		colocarNovaPeca(ValoresColunasMatriz.e.valorColuna, 7, new Peao(tabuleiro, Cor.VERDE));
+		colocarNovaPeca(ValoresColunasMatriz.f.valorColuna, 7, new Peao(tabuleiro, Cor.VERDE));
+		colocarNovaPeca(ValoresColunasMatriz.g.valorColuna, 7, new Peao(tabuleiro, Cor.VERDE));
+		colocarNovaPeca(ValoresColunasMatriz.h.valorColuna, 7, new Peao(tabuleiro, Cor.VERDE));
 
 		
-		colocarNovaPeca(ValoresColunasMatriz.b.valorColuna, 1, new Torre(tabuleiro, Cor.VERMELHO));
-		colocarNovaPeca(ValoresColunasMatriz.a.valorColuna, 1, new Rei(tabuleiro, Cor.VERMELHO));
+		colocarNovaPeca(ValoresColunasMatriz.a.valorColuna, 1, new Torre(tabuleiro, Cor.VERMELHO));
+		colocarNovaPeca(ValoresColunasMatriz.e.valorColuna, 1, new Rei(tabuleiro, Cor.VERMELHO));
+		colocarNovaPeca(ValoresColunasMatriz.h.valorColuna, 1, new Torre(tabuleiro, Cor.VERMELHO));
+		colocarNovaPeca(ValoresColunasMatriz.a.valorColuna, 2, new Peao(tabuleiro, Cor.VERMELHO));
+		colocarNovaPeca(ValoresColunasMatriz.b.valorColuna, 2, new Peao(tabuleiro, Cor.VERMELHO));
+		colocarNovaPeca(ValoresColunasMatriz.c.valorColuna, 2, new Peao(tabuleiro, Cor.VERMELHO));
+		colocarNovaPeca(ValoresColunasMatriz.d.valorColuna, 2, new Peao(tabuleiro, Cor.VERMELHO));
+		colocarNovaPeca(ValoresColunasMatriz.e.valorColuna, 2, new Peao(tabuleiro, Cor.VERMELHO));
+		colocarNovaPeca(ValoresColunasMatriz.f.valorColuna, 2, new Peao(tabuleiro, Cor.VERMELHO));
+		colocarNovaPeca(ValoresColunasMatriz.g.valorColuna, 2, new Peao(tabuleiro, Cor.VERMELHO));
+		colocarNovaPeca(ValoresColunasMatriz.h.valorColuna, 2, new Peao(tabuleiro, Cor.VERMELHO));
 
 	}
 }
