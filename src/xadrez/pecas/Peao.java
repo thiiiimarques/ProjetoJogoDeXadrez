@@ -71,8 +71,8 @@ public class Peao extends PecaXadrez{
 			}
 			
 			posicaoAuxiliar.setValores(posicao.getLinha() + 2, posicao.getColuna());
-			Posicao posicaoAuxiliar2 = new Posicao(posicao.getLinha() - 1, posicao.getColuna());
-			if(getTabuleiro().existePosicao(posicaoAuxiliar) && !getTabuleiro().existePeca(posicaoAuxiliar) && getTabuleiro().existePosicao(posicaoAuxiliar2) && !getTabuleiro().existePeca(posicaoAuxiliar)) {
+			Posicao posicaoAuxiliar2 = new Posicao(posicao.getLinha() + 1, posicao.getColuna());
+			if(getTabuleiro().existePosicao(posicaoAuxiliar) && !getTabuleiro().existePeca(posicaoAuxiliar) && getTabuleiro().existePosicao(posicaoAuxiliar2) && !getTabuleiro().existePeca(posicaoAuxiliar2) && getContagemMovimentos() == 0) {
 				matriz[posicaoAuxiliar.getLinha()][posicaoAuxiliar.getColuna()] = true;
 			}
 			

@@ -23,6 +23,7 @@ public class PartidaXadrez {
 	private boolean xeque;
 	private boolean xequeMate;
 	private PecaXadrez jogadaEspecialEnPassant;
+	private PecaXadrez promocaoPeao;
 	
 	private List<Peca> pecasTabuleiro = new ArrayList<>();
 	private List<Peca> pecasCapturadas = new ArrayList<>();
@@ -54,6 +55,10 @@ public class PartidaXadrez {
 	
 	public PecaXadrez getJogadaEspecialEnPassant() {
 		return jogadaEspecialEnPassant;
+	}
+	
+	public PecaXadrez getPromocaoPeao() {
+		return promocaoPeao;
 	}
 	
 	
@@ -92,6 +97,17 @@ public class PartidaXadrez {
 		
 		PecaXadrez pecaMovida = (PecaXadrez) tabuleiro.buscarPeca(destino);
 		
+		
+		// Jogada Especial de Promocao do Peao
+		promocaoPeao = null;
+		if(pecaMovida instanceof Peao) {
+			if( pecaMovida.getCor() == Cor.VERDE && destino.getLinha() == 0 || pecaMovida.getCor() == Cor.VERMELHO && destino.getLinha() == 7){
+				promocaoPeao = (PecaXadrez) tabuleiro.buscarPeca(destino);
+				promocaoPeao = substituirPecaPromovida("Q");
+			}
+		}
+		
+		
 		xeque = (testarXeque(oponente(jogador))) ? true : false;
 		
 		if(testarXequeMate(oponente(jogador))) {
@@ -111,6 +127,33 @@ public class PartidaXadrez {
 		}
 		
 		return (PecaXadrez) pecaCapturada;
+	}
+	
+	public PecaXadrez substituirPecaPromovida(String tipo) {
+		if(promocaoPeao == null) {
+			throw new IllegalStateException("Não ha peça para ser promovida neste momento");
+		}
+		if(!tipo.equals("B") && !tipo.equals("C") && !tipo.equals("T") && !tipo.equals("Q")) {
+			return promocaoPeao;
+		}
+		
+		Posicao posicaoPecaPromovida = promocaoPeao.getPosicaoXadrez().converterPosicaoMatriz();
+		Peca peca = tabuleiro.removerPeca(posicaoPecaPromovida);
+		pecasTabuleiro.remove(peca);
+		
+		PecaXadrez novaPeca = novaPecaPromovida(tipo, promocaoPeao.getCor());
+		tabuleiro.colocarPecaTabuleiro(novaPeca, posicaoPecaPromovida);
+		pecasTabuleiro.add(novaPeca);
+		
+		return novaPeca;
+		
+	}
+	
+	private PecaXadrez novaPecaPromovida(String tipo, Cor cor) {
+		if (tipo.equals("B")) return new Bispo(tabuleiro, cor);
+		if (tipo.equals("C")) return new Cavalo(tabuleiro, cor);
+		if (tipo.equals("T")) return new Torre(tabuleiro, cor);
+		return new Rainha(tabuleiro, cor);
 	}
 	
 	private Peca moverPeca(Posicao origem, Posicao destino) {

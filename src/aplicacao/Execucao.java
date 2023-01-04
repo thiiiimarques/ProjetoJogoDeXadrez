@@ -42,6 +42,16 @@ public class Execucao {
 					pecasCapturadas.add(pecaCapturada);
 				}
 				
+				if(partidaXadrez.getPromocaoPeao() != null) {
+					System.out.println("Wow! Peão promovido, digite a Letra da peça que você quer promovê-lo (B/C/T/Q): ");
+					String tipoPromocao = scan.nextLine().toUpperCase();
+					while(!tipoPromocao.equals("B") && !tipoPromocao.equals("C") && !tipoPromocao.equals("T") && !tipoPromocao.equals("Q")) {
+						System.out.println("Opa, valor escolhido invalido! Digite a Letra da peça que você quer promovê-lo (B/C/T/Q): ");
+						tipoPromocao = scan.nextLine().toUpperCase();
+					}
+					partidaXadrez.substituirPecaPromovida(tipoPromocao);
+				}
+				
 				System.out.println();
 			}
 			catch (ExcecaoXadrez excecao) {
