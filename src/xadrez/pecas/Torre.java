@@ -32,7 +32,7 @@ public class Torre extends PecaXadrez{
 			posicaoAuxiliar.setLinha(posicaoAuxiliar.getLinha() - 1);
 		}
 		if(getTabuleiro().existePosicao(posicaoAuxiliar) && existePecaAdversaria(posicaoAuxiliar)) {
-			matriz[posicaoAuxiliar.getColuna()][posicaoAuxiliar.getColuna()] = true;
+			matriz[posicaoAuxiliar.getLinha()][posicaoAuxiliar.getColuna()] = true;
 		}
 		
 		// Movimentação para esquerda da peça
@@ -41,10 +41,10 @@ public class Torre extends PecaXadrez{
 				
 		while(getTabuleiro().existePosicao(posicaoAuxiliar) && !getTabuleiro().existePeca(posicaoAuxiliar)) {
 			matriz[posicaoAuxiliar.getLinha()][posicaoAuxiliar.getColuna()] = true;
-			posicaoAuxiliar.setLinha(posicaoAuxiliar.getLinha() - 1);
+			posicaoAuxiliar.setColuna(posicaoAuxiliar.getColuna() - 1);
 		}
 		if(getTabuleiro().existePosicao(posicaoAuxiliar) && existePecaAdversaria(posicaoAuxiliar)) {
-			matriz[posicaoAuxiliar.getColuna()][posicaoAuxiliar.getColuna()] = true;
+			matriz[posicaoAuxiliar.getLinha()][posicaoAuxiliar.getColuna()] = true;
 		}
 		
 		// Movimentação para direita da peça
@@ -53,10 +53,10 @@ public class Torre extends PecaXadrez{
 				
 		while(getTabuleiro().existePosicao(posicaoAuxiliar) && !getTabuleiro().existePeca(posicaoAuxiliar)) {
 			matriz[posicaoAuxiliar.getLinha()][posicaoAuxiliar.getColuna()] = true;
-			posicaoAuxiliar.setLinha(posicaoAuxiliar.getLinha() - 1);
+			posicaoAuxiliar.setColuna(posicaoAuxiliar.getColuna() + 1);
 		}
 		if(getTabuleiro().existePosicao(posicaoAuxiliar) && existePecaAdversaria(posicaoAuxiliar)) {
-			matriz[posicaoAuxiliar.getColuna()][posicaoAuxiliar.getColuna()] = true;
+			matriz[posicaoAuxiliar.getLinha()][posicaoAuxiliar.getColuna()] = true;
 		}
 		
 		// Movimentação para baixo da peça
@@ -65,10 +65,10 @@ public class Torre extends PecaXadrez{
 		
 		while(getTabuleiro().existePosicao(posicaoAuxiliar) && !getTabuleiro().existePeca(posicaoAuxiliar)) {
 			matriz[posicaoAuxiliar.getLinha()][posicaoAuxiliar.getColuna()] = true;
-			posicaoAuxiliar.setLinha(posicaoAuxiliar.getLinha() - 1);
+			posicaoAuxiliar.setLinha(posicaoAuxiliar.getLinha() + 1);
 		}
 		if(getTabuleiro().existePosicao(posicaoAuxiliar) && existePecaAdversaria(posicaoAuxiliar)) {
-			matriz[posicaoAuxiliar.getColuna()][posicaoAuxiliar.getColuna()] = true;
+			matriz[posicaoAuxiliar.getLinha()][posicaoAuxiliar.getColuna()] = true;
 		}
 		
 		return matriz;

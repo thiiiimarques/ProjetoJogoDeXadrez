@@ -24,6 +24,11 @@ public class Execucao {
 				System.out.println();
 				System.out.print("Posicao de Origem: ");
 				PosicaoXadrez origem = InterfacePartidaXadrez.lerPosicaoXadrez(scan);
+				
+				boolean[][] corPossiveisMovimentos = partidaXadrez.corMovimentosPossiveis(origem);
+				InterfacePartidaXadrez.limparTela();
+				InterfacePartidaXadrez.imprimirTabuleiro(partidaXadrez.getPecas(), corPossiveisMovimentos);
+				
 				System.out.println();
 				System.out.print("Posicao de Destino: ");
 				PosicaoXadrez destino = InterfacePartidaXadrez.lerPosicaoXadrez(scan);

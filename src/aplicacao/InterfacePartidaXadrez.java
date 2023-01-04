@@ -14,6 +14,9 @@ public class InterfacePartidaXadrez {
 	public static final String ANSI_RESET = "\u001B[0m";
 	public static final String ANSI_RED = "\u001B[31m";
 	public static final String ANSI_GREEN = "\u001B[32m";
+	
+	public static final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
+	public static final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
 
 	
 	// Codigo tirado do stackoverflow : https://stackoverflow.com/questions/2979383/java-clear-the-console
@@ -44,7 +47,7 @@ public class InterfacePartidaXadrez {
 		for(int i=0; i<pecas.length; i++) {
 			System.out.print((i+1) + " ");
 			for(int j=0; j<pecas.length; j++) {
-				imprimirPeca(pecas[i][j]);
+				imprimirPeca(pecas[i][j], false);
 			}
 			System.out.println();
 		}
@@ -53,9 +56,27 @@ public class InterfacePartidaXadrez {
 		
 	}
 	
-	private static void imprimirPeca(PecaXadrez peca) {
+	public static void imprimirTabuleiro(PecaXadrez[][] pecas, boolean[][] corPossiveisMovimentos) {
+		
+		for(int i=0; i<pecas.length; i++) {
+			System.out.print((i+1) + " ");
+			for(int j=0; j<pecas.length; j++) {
+				imprimirPeca(pecas[i][j], corPossiveisMovimentos[i][j]);
+			}
+			System.out.println();
+		}
+		
+		System.out.println("  a b c d e f g h");
+		
+	}
+	
+	private static void imprimirPeca(PecaXadrez peca, boolean corFundoMovimento) {
+		if(corFundoMovimento) {
+			System.out.print(ANSI_YELLOW_BACKGROUND);
+		}
+		
 		if( peca == null) {
-			System.out.print("-");
+			System.out.print("-" + ANSI_RESET);
 		}
 		else {
 			if(peca.getCor() == Cor.VERMELHO) {

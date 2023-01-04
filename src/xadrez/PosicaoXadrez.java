@@ -27,7 +27,6 @@ public class PosicaoXadrez {
 	protected Posicao converterPosicaoMatriz() {
 		return new Posicao((linha-1) , coluna );
 		
-		
 	}
 	
 	protected static PosicaoXadrez converterPosicaoJogo(Posicao posicao) {
