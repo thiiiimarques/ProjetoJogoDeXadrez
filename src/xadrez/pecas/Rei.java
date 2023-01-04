@@ -3,17 +3,27 @@ package xadrez.pecas;
 import tabuleiro.Posicao;
 import tabuleiro.Tabuleiro;
 import xadrez.Cor;
+import xadrez.PartidaXadrez;
 import xadrez.PecaXadrez;
 
 public class Rei extends PecaXadrez{
+	
+	private PartidaXadrez partidaXadrez;
 
-	public Rei(Tabuleiro tabuleiro, Cor cor) {
+	public Rei(Tabuleiro tabuleiro, Cor cor, PartidaXadrez partidaXadrez) {
 		super(tabuleiro, cor);
+		this.partidaXadrez = partidaXadrez;
 	}
 	
 	@Override
 	public String toString() {
 		return "R";
+	}
+	
+	private boolean testarJogadaRoque(Posicao posicao) {
+		
+		PecaXadrez peca = (PecaXadrez) getTabuleiro().buscarPeca(posicao);
+		return peca != null && peca instanceof Torre && peca.getCor() == getCor() && peca.getContagemMovimentos() == 0;
 	}
 
 	@Override
@@ -79,7 +89,30 @@ public class Rei extends PecaXadrez{
 			matriz[posicaoAuxiliar.getLinha()][posicaoAuxiliar.getColuna()] = true;
 		}
 		
+		// Possivel Movimento Especial no jogo de Xadrez - Roque
 		
+		if(getContagemMovimentos() == 0 && !partidaXadrez.getXeque()) {
+			// Roque Pequeno - possibilidade de andar uma casa
+			Posicao posicaoRoquePequeno = new Posicao(posicao.getLinha(), posicao.getColuna() + 3);
+			if(testarJogadaRoque(posicaoRoquePequeno)) {
+				Posicao posicao1 = new Posicao(posicao.getLinha(), posicao.getColuna() + 1);
+				Posicao posicao2 = new Posicao(posicao.getLinha(), posicao.getColuna() + 2);
+				if(getTabuleiro().buscarPeca(posicao1) == null && getTabuleiro().buscarPeca(posicao2) == null) {
+					matriz[posicao.getLinha()][posicao.getColuna() + 2] = true;
+				}
+			}
+			
+			// Roque Grande - possibilidade de andar uma casa
+			Posicao posicaoRoqueGrande = new Posicao(posicao.getLinha(), posicao.getColuna() - 4);
+			if(testarJogadaRoque(posicaoRoqueGrande)) {
+				Posicao posicao1 = new Posicao(posicao.getLinha(), posicao.getColuna() - 1);
+				Posicao posicao2 = new Posicao(posicao.getLinha(), posicao.getColuna() - 2);
+				Posicao posicao3 = new Posicao(posicao.getLinha(), posicao.getColuna() - 3);
+				if(getTabuleiro().buscarPeca(posicao1) == null && getTabuleiro().buscarPeca(posicao2) == null && getTabuleiro().buscarPeca(posicao3) == null) {
+					matriz[posicao.getLinha()][posicao.getColuna() - 2] = true;
+				}
+			}
+		}
 		
 		return matriz;
 	}

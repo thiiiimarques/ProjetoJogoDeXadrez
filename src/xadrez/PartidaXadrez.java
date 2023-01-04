@@ -108,20 +108,63 @@ public class PartidaXadrez {
 			pecasCapturadas.add(pecaCapturada);
 		}
 		
+		
+		// Movimento Especial Roque Pequeno
+		
+		if(pecaRemovida instanceof Rei && destino.getColuna() == origem.getColuna() + 2) {
+			Posicao origemTorre = new Posicao(origem.getLinha(), origem.getColuna() + 3);
+			Posicao destinoTorre = new Posicao(origem.getLinha(), origem.getColuna() + 1);
+			PecaXadrez torre = (PecaXadrez) tabuleiro.removerPeca(origemTorre);
+			tabuleiro.colocarPecaTabuleiro(torre, destinoTorre);
+			torre.adicionarMovimentos();
+		}
+		
+		// Movimento Especial Roque Grande
+		
+				if(pecaRemovida instanceof Rei && destino.getColuna() == origem.getColuna() - 2) {
+					Posicao origemTorre = new Posicao(origem.getLinha(), origem.getColuna() - 4);
+					Posicao destinoTorre = new Posicao(origem.getLinha(), origem.getColuna() - 1);
+					PecaXadrez torre = (PecaXadrez) tabuleiro.removerPeca(origemTorre);
+					tabuleiro.colocarPecaTabuleiro(torre, destinoTorre);
+					torre.adicionarMovimentos();
+				}
+		
+		
 		return pecaCapturada;
 	}
 	
 	private void desmoverPeca(Posicao origem, Posicao destino, Peca pecaCapturada) {
 		
-		PecaXadrez peca = (PecaXadrez) tabuleiro.removerPeca(destino);
-		peca.diminuirMovimentos();
-		tabuleiro.colocarPecaTabuleiro(peca, origem);
+		PecaXadrez pecaRemovida = (PecaXadrez) tabuleiro.removerPeca(destino);
+		pecaRemovida.diminuirMovimentos();
+		tabuleiro.colocarPecaTabuleiro(pecaRemovida, origem);
 		
 		if(pecaCapturada != null) {
 			tabuleiro.colocarPecaTabuleiro(pecaCapturada, destino);
 			pecasCapturadas.remove(pecaCapturada);
 			pecasTabuleiro.add(pecaCapturada);
 			
+		}
+		
+		
+		// Movimento Especial Roque Pequeno
+		
+		if(pecaRemovida instanceof Rei && destino.getColuna() == origem.getColuna() + 2) {
+			Posicao origemTorre = new Posicao(origem.getLinha(), origem.getColuna() + 3);
+			Posicao destinoTorre = new Posicao(origem.getLinha(), origem.getColuna() + 1);
+			PecaXadrez torre = (PecaXadrez) tabuleiro.removerPeca(destinoTorre);
+			tabuleiro.colocarPecaTabuleiro(torre, origemTorre);
+			torre.diminuirMovimentos();
+		}
+		
+		// Movimento Especial Roque Grande
+		
+		if(pecaRemovida instanceof Rei && destino.getColuna() == origem.getColuna() - 2) {
+			Posicao origemTorre = new Posicao(origem.getLinha(), origem.getColuna() - 4);
+			Posicao destinoTorre = new Posicao(origem.getLinha(), origem.getColuna() - 1);
+			PecaXadrez torre = (PecaXadrez) tabuleiro.removerPeca(destinoTorre);
+			tabuleiro.colocarPecaTabuleiro(torre, origemTorre);
+			torre.diminuirMovimentos();
 		}
 	}
 	
@@ -228,7 +271,7 @@ public class PartidaXadrez {
 		colocarNovaPeca(ValoresColunasMatriz.b.valorColuna, 8, new Cavalo(tabuleiro, Cor.VERDE));
 		colocarNovaPeca(ValoresColunasMatriz.c.valorColuna, 8, new Bispo(tabuleiro, Cor.VERDE));
 		colocarNovaPeca(ValoresColunasMatriz.d.valorColuna, 8, new Rainha(tabuleiro, Cor.VERDE));
-		colocarNovaPeca(ValoresColunasMatriz.e.valorColuna, 8, new Rei(tabuleiro, Cor.VERDE));
+		colocarNovaPeca(ValoresColunasMatriz.e.valorColuna, 8, new Rei(tabuleiro, Cor.VERDE, this));
 		colocarNovaPeca(ValoresColunasMatriz.f.valorColuna, 8, new Bispo(tabuleiro, Cor.VERDE));
 		colocarNovaPeca(ValoresColunasMatriz.g.valorColuna, 8, new Cavalo(tabuleiro, Cor.VERDE));
 		colocarNovaPeca(ValoresColunasMatriz.h.valorColuna, 8, new Torre(tabuleiro, Cor.VERDE));
@@ -246,7 +289,7 @@ public class PartidaXadrez {
 		colocarNovaPeca(ValoresColunasMatriz.b.valorColuna, 1, new Cavalo(tabuleiro, Cor.VERMELHO));
 		colocarNovaPeca(ValoresColunasMatriz.c.valorColuna, 1, new Bispo(tabuleiro, Cor.VERMELHO));
 		colocarNovaPeca(ValoresColunasMatriz.d.valorColuna, 1, new Rainha(tabuleiro, Cor.VERMELHO));
-		colocarNovaPeca(ValoresColunasMatriz.e.valorColuna, 1, new Rei(tabuleiro, Cor.VERMELHO));
+		colocarNovaPeca(ValoresColunasMatriz.e.valorColuna, 1, new Rei(tabuleiro, Cor.VERMELHO, this));
 		colocarNovaPeca(ValoresColunasMatriz.f.valorColuna, 1, new Bispo(tabuleiro, Cor.VERMELHO));
 		colocarNovaPeca(ValoresColunasMatriz.g.valorColuna, 1, new Cavalo(tabuleiro, Cor.VERMELHO));
 		colocarNovaPeca(ValoresColunasMatriz.h.valorColuna, 1, new Torre(tabuleiro, Cor.VERMELHO));
