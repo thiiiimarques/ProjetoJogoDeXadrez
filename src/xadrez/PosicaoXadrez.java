@@ -27,7 +27,7 @@ public class PosicaoXadrez {
 	protected Posicao converterPosicaoMatriz() {
 		return new Posicao((linha-1) , coluna );
 		
-		// como ele fez uma operação de diminuir uma letra por outra letra? 
+		
 	}
 	
 	protected static PosicaoXadrez converterPosicaoJogo(Posicao posicao) {

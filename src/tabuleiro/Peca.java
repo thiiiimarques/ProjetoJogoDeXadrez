@@ -20,7 +20,7 @@ public abstract class Peca {
 	public abstract boolean[][] possibilidadeDeMovimentos();
 		
 		
-	public boolean possibilidadeDeMovimento() {
+	public boolean possibilidadeDeMovimento(Posicao posicao) {
 		
 		 return possibilidadeDeMovimentos()[posicao.getLinha()][posicao.getColuna()];
 	}
@@ -30,7 +30,7 @@ public abstract class Peca {
 		boolean[][] matriz = possibilidadeDeMovimentos();
 		for(int i = 0; i<matriz.length; i++) {
 			for(int j = 0; j<matriz.length; j++) {
-				if(matriz[i][j]) {
+				if(matriz[i][j] == false) {
 					return true;
 				}
 			}
