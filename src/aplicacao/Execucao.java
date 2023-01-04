@@ -20,7 +20,7 @@ public class Execucao {
 		PartidaXadrez partidaXadrez = new PartidaXadrez();
 		List<PecaXadrez> pecasCapturadas =  new ArrayList<>();
 		
-		while(true) {
+		while(!partidaXadrez.getXequeMate()) {
 			try {
 				InterfacePartidaXadrez.limparTela();
 				InterfacePartidaXadrez.imprimirPartida(partidaXadrez, pecasCapturadas);
@@ -53,7 +53,10 @@ public class Execucao {
 				scan.nextLine();
 			}
 			
-		} 
+		}
+		
+		InterfacePartidaXadrez.limparTela();
+		InterfacePartidaXadrez.imprimirPartida(partidaXadrez, pecasCapturadas);
 		
 		
 

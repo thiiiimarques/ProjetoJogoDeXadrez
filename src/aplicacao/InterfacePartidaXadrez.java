@@ -51,14 +51,24 @@ public class InterfacePartidaXadrez {
 		System.out.println();
 		imprimirPecasCapturadas(pecasCapturadas);
 		System.out.println();
-		System.out.println("Turno: " + partidaXadrez.getTurno());
-		System.out.println("Aguardando o Jogador: " + partidaXadrez.getJogador());
 		
-		if(partidaXadrez.getXequeMate()) {
+		if(!partidaXadrez.getXequeMate()) {
+			System.out.println("Turno: " + partidaXadrez.getTurno());
+			System.out.println("Aguardando o Jogador: " + partidaXadrez.getJogador());
+			
+			if(partidaXadrez.getXequeMate()) {
+				System.out.print(ANSI_YELLOW);
+				System.out.println("XEQUE!!!");
+				System.out.print(ANSI_RESET);
+			}
+		}
+		else {
 			System.out.print(ANSI_YELLOW);
 			System.out.println("XEQUE-MATE!!!");
+			System.out.println("O vencedor é o: " + partidaXadrez.getJogador());
 			System.out.print(ANSI_RESET);
 		}
+	
 	}
 	
 	public static void imprimirTabuleiro(PecaXadrez[][] pecas) {

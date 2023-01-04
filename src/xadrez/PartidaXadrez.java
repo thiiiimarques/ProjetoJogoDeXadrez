@@ -16,6 +16,7 @@ public class PartidaXadrez {
 	private int turno;
 	private Cor jogador;
 	private Tabuleiro tabuleiro;
+	private boolean xeque;
 	private boolean xequeMate;
 	
 	private List<Peca> pecasTabuleiro = new ArrayList<>();
@@ -36,6 +37,10 @@ public class PartidaXadrez {
 	
 	public int getTurno() {
 		return turno;
+	}
+	
+	public boolean getXeque() {
+		return xeque;
 	}
 	
 	public boolean getXequeMate() {
@@ -70,15 +75,21 @@ public class PartidaXadrez {
 		validarPosicaoDestino(origem, destino);
 		Peca pecaCapturada = moverPeca(origem, destino);
 		
-		if(testarXequeMate(jogador)) {
+		if(testarXeque(jogador)) {
 			desmoverPeca(origem, destino, pecaCapturada);
 			
 			throw new ExcecaoXadrez("Você não pode se colocar em Xeque-Mate");
 		}
 		
-		xequeMate = (testarXequeMate(oponente(jogador))) ? true : false;
+		xeque = (testarXeque(oponente(jogador))) ? true : false;
 		
-		proximaJogada();
+		if(testarXequeMate(oponente(jogador))) {
+			xequeMate = true;
+		}
+		else {
+			proximaJogada();
+		}
+		
 		return (PecaXadrez) pecaCapturada;
 	}
 	
@@ -155,7 +166,7 @@ public class PartidaXadrez {
 		 throw new IllegalStateException("Não Existe no " + cor + "Rei no Tabuleiro");
 	 }
 	 
-	 private boolean testarXequeMate(Cor cor) {
+	 private boolean testarXeque(Cor cor) {
 		 
 		 Posicao posicaoRei = rei(cor).getPosicaoXadrez().converterPosicaoMatriz();
 		 List<Peca> pecasOponentes = pecasTabuleiro.stream().filter(x -> ((PecaXadrez) x).getCor() == oponente(cor)).collect(Collectors.toList());
@@ -169,6 +180,35 @@ public class PartidaXadrez {
 		 
 		 return false;
 	 }
+	 
+	 private boolean testarXequeMate(Cor cor) {
+		 if(!testarXeque(cor)) {
+			 return false;
+		 }
+		  
+		 List<Peca> listaAuxiliar = pecasTabuleiro.stream().filter(x -> ((PecaXadrez) x).getCor() == cor).collect(Collectors.toList());
+		 for (Peca peca : listaAuxiliar) {
+			 boolean[][] matriz = peca.possibilidadeDeMovimentos();
+			 
+			 for(int i = 0; i < matriz.length; i++) {
+				 for(int j = 0; j < matriz.length; j++) {
+					 if(matriz[i][j]) {
+						 Posicao origem = ((PecaXadrez)peca).getPosicaoXadrez().converterPosicaoMatriz();
+						 Posicao destino = new Posicao(i, j);
+						 Peca pecaCapturada = moverPeca(origem, destino);
+						 boolean testeXeque = testarXeque(cor);
+						 desmoverPeca(origem, destino, pecaCapturada);
+						 
+						 if(!testeXeque) {
+							 return false;
+						 }
+					 }
+				 }
+			 }
+		 }
+		 
+		 return true;
+	 }
 	
 	
 	private void colocarNovaPeca(int coluna, int linha, PecaXadrez peca) {
@@ -177,18 +217,14 @@ public class PartidaXadrez {
 	}
 	
 	private void iniciarPartida() {
-		colocarNovaPeca(ValoresColunasMatriz.c.valorColuna, 8, new Torre(tabuleiro, Cor.VERDE));
-		colocarNovaPeca(ValoresColunasMatriz.d.valorColuna, 8, new Rei(tabuleiro, Cor.VERDE));
-		colocarNovaPeca(ValoresColunasMatriz.e.valorColuna, 8, new Torre(tabuleiro, Cor.VERDE));
-		colocarNovaPeca(ValoresColunasMatriz.c.valorColuna, 7, new Torre(tabuleiro, Cor.VERDE));
-		colocarNovaPeca(ValoresColunasMatriz.d.valorColuna, 7, new Torre(tabuleiro, Cor.VERDE));
-		colocarNovaPeca(ValoresColunasMatriz.e.valorColuna, 7, new Torre(tabuleiro, Cor.VERDE));
+
+		colocarNovaPeca(ValoresColunasMatriz.d.valorColuna, 8, new Torre(tabuleiro, Cor.VERDE));
+		colocarNovaPeca(ValoresColunasMatriz.e.valorColuna, 8, new Rei(tabuleiro, Cor.VERDE));
+		colocarNovaPeca(ValoresColunasMatriz.h.valorColuna, 2, new Torre(tabuleiro, Cor.VERDE));
+
 		
-		colocarNovaPeca(ValoresColunasMatriz.c.valorColuna, 1, new Torre(tabuleiro, Cor.VERMELHO));
-		colocarNovaPeca(ValoresColunasMatriz.d.valorColuna, 1, new Rei(tabuleiro, Cor.VERMELHO));
-		colocarNovaPeca(ValoresColunasMatriz.e.valorColuna, 1, new Torre(tabuleiro, Cor.VERMELHO));
-		colocarNovaPeca(ValoresColunasMatriz.c.valorColuna, 2, new Torre(tabuleiro, Cor.VERMELHO));
-		colocarNovaPeca(ValoresColunasMatriz.d.valorColuna, 2, new Torre(tabuleiro, Cor.VERMELHO));
-		colocarNovaPeca(ValoresColunasMatriz.e.valorColuna, 2, new Torre(tabuleiro, Cor.VERMELHO));
+		colocarNovaPeca(ValoresColunasMatriz.b.valorColuna, 1, new Torre(tabuleiro, Cor.VERMELHO));
+		colocarNovaPeca(ValoresColunasMatriz.a.valorColuna, 1, new Rei(tabuleiro, Cor.VERMELHO));
+
 	}
 }
